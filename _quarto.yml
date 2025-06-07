@@ -2,22 +2,73 @@ project:
   type: website
 
 website:
-  title: "blog"
+  title: "Resilient Technologies S.A.S"
+  description: "Blog de casos de uso en ciencia de datos aplicados al mundo real"
+  favicon: logo-restec.png
+  
   navbar:
+    background: "#151C24"
+    foreground: "white"
+    logo: logo-restec.png
+    logo-alt: "Resilient Technologies Logo"
+    title: false
+    collapse-below: lg
+    left:
+      - text: "Inicio"
+        href: index.qmd
     right:
-      - about.qmd
+      - text: "Acerca de"
+        href: about.qmd
       - icon: github
         href: https://github.com/ResTec-Col
+        aria-label: "GitHub"
       - icon: twitter
         href: https://x.com/restec_ai
+        aria-label: "Twitter"
       - icon: facebook
         href: https://www.facebook.com/profile.php?id=61560886237075
+        aria-label: "Facebook"
       - icon: instagram
         href: https://www.instagram.com/restec.ia/?next=%2F
+        aria-label: "Instagram"
+      - icon: linkedin
+        href: https://www.linkedin.com/in/resilient-technologies-restec-52a222322/
+        aria-label: "LinkedIn"
+
+  sidebar:
+    - title: "Categorías"
+      style: "floating"
+      collapse-level: 2
+      contents:
+        - section: "Ciencia de Datos"
+          contents:
+            - text: "Machine Learning"
+            - text: "Estadística"
+            - text: "Web Scraping"
+            - text: "Agentes de IA"
+
+  page-footer:
+    background: "#151C24"
+    foreground: "white"
+    border: true
+    center: |
+      © 2025 by **Resilient Technologies S.A.S**  
+      Todos los derechos reservados
 format:
   html:
     theme:
-      - cosmo
-      - brand
+      light: [cosmo, custom-light.scss]
+      dark: [cosmo, custom-dark.scss]
     css: styles.css
+    toc: true
+    toc-location: right
+    code-fold: false
+    code-tools: false
+    code-copy: hover
+    highlight-style: github
+    mainfont: "Poppins"
+    fontsize: "16px"
+    linestretch: 1.6
 
+execute:
+  freeze: auto

@@ -1,0 +1,329 @@
+/*-- scss:defaults --*/
+
+// Resilient Technologies - Colores Corporativos para Dark Mode
+$restec-blue-gray: #7986CB;     // Más claro para mejor contraste
+$restec-red: #FF6B7A;          // Más claro para mejor contraste  
+$restec-dark: #151C24;         // Mantener para navbar
+$restec-white: #E8EAED;        // Gris muy claro en lugar de blanco puro
+
+// Dark Mode Palette - Basado en Material Design y mejores prácticas
+$dark-bg-primary: #121212;      // Material Design standard
+$dark-bg-secondary: #1E1E1E;    // Superficie elevada
+$dark-bg-tertiary: #2D2D2D;     // Superficie más elevada
+$dark-text-primary: #E8EAED;    // Texto principal (muy legible)
+$dark-text-secondary: #BDC1C6;  // Texto secundario
+$dark-text-muted: #9AA0A6;      // Texto desactivado
+$dark-border: #5F6368;          // Bordes visibles
+
+// Variables del tema oscuro para Quarto
+$theme: "dark";
+
+// Bootstrap color overrides for dark theme
+$primary: $restec-red;
+$secondary: $restec-blue-gray;
+$dark: $restec-dark;
+$light: $dark-bg-secondary;
+$info: #81C995;                 
+$success: #81C784;              
+$warning: #FFB74D;              
+$danger: $restec-red;
+
+// Body dark theme
+$body-bg: $dark-bg-primary;
+$body-color: $dark-text-primary;
+
+// Links dark theme - con mejor contraste
+$link-color: #FF8A95;           
+$link-hover-color: #A5B4FC;     
+
+// Typography dark theme
+$font-family-sans-serif: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+$headings-font-family: "Poppins", sans-serif;
+$headings-font-weight: 600;
+$headings-color: $dark-text-primary;
+
+/*-- scss:rules --*/
+
+// QUARTO DARK MODE - Usar selectores correctos de Quarto
+// Quarto usa .quarto-dark en el body, no data-bs-theme
+
+// Base dark theme styles para Quarto
+.quarto-dark {
+  background-color: $dark-bg-primary !important;
+  color: $dark-text-primary !important;
+}
+
+// Texto principal en modo oscuro
+.quarto-dark h1,
+.quarto-dark h2,
+.quarto-dark h3,
+.quarto-dark h4,
+.quarto-dark h5,
+.quarto-dark h6 {
+  color: $dark-text-primary !important;
+}
+
+.quarto-dark p,
+.quarto-dark div,
+.quarto-dark span {
+  color: $dark-text-primary !important;
+}
+
+// Banner del título en modo oscuro
+.quarto-dark .title-block-banner.page-columns {
+  background: linear-gradient(135deg, #{lighten($restec-dark, 8%)} 0%, #{$restec-blue-gray} 100%) !important;
+  color: $dark-text-primary !important;
+  
+  h1.title {
+    color: $dark-text-primary !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  }
+  
+  .subtitle {
+    color: $dark-text-secondary !important;
+  }
+}
+
+// Cards en modo oscuro con contraste mejorado
+.quarto-dark .card {
+  background-color: $dark-bg-secondary !important;
+  border: 1px solid $dark-border !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3) !important;
+  color: $dark-text-primary !important;
+  
+  .card-title {
+    color: $dark-text-primary !important;
+    
+    a {
+      color: $dark-text-primary !important;
+      text-decoration: none;
+      
+      &:hover {
+        color: $link-color !important;
+      }
+    }
+  }
+  
+  .card-text {
+    color: $dark-text-secondary !important;
+  }
+  
+  // Metadatos de las cards
+  .card-meta,
+  .listing-date,
+  .listing-author {
+    color: $dark-text-muted !important;
+  }
+}
+
+// Navbar en modo oscuro (mantener diseño corporativo)
+.quarto-dark .navbar {
+  background-color: $restec-dark !important;
+}
+
+.quarto-dark .navbar-nav .nav-link {
+  color: $restec-white !important;
+  
+  &:hover {
+    color: $dark-text-primary !important;
+    background-color: $restec-blue-gray !important;
+  }
+}
+
+// About page en modo oscuro
+.quarto-dark .about-contents {
+  h2 {
+    color: $dark-text-primary !important;
+    border-bottom: 3px solid $link-color !important;
+  }
+  
+  h3, h4, h5, h6 {
+    color: $dark-text-primary !important;
+  }
+  
+  p {
+    color: $dark-text-primary !important;
+  }
+  
+  strong {
+    color: $link-color !important;
+  }
+  
+  ul li {
+    color: $dark-text-primary !important;
+  }
+}
+
+// Badges/categorías en modo oscuro
+.quarto-dark .badge {
+  &.bg-primary,
+  &.badge-primary {
+    background-color: $restec-red !important;
+    color: $dark-text-primary !important;
+  }
+  
+  &.bg-secondary,
+  &.badge-secondary {
+    background-color: $restec-blue-gray !important;
+    color: $dark-text-primary !important;
+  }
+}
+
+// Código en modo oscuro
+.quarto-dark pre {
+  background-color: $dark-bg-tertiary !important;
+  border: 1px solid $dark-border !important;
+  color: $dark-text-primary !important;
+  
+  code {
+    background-color: transparent !important;
+    color: inherit !important;
+  }
+}
+
+.quarto-dark :not(pre) > code {
+  background-color: rgba($link-color, 0.15) !important;
+  color: $link-color !important;
+  border: 1px solid rgba($link-color, 0.3) !important;
+}
+
+// Listing controls en modo oscuro
+.quarto-dark .quarto-listing-sort select,
+.quarto-dark .quarto-listing-category select {
+  background-color: $dark-bg-secondary !important;
+  border-color: $dark-border !important;
+  color: $dark-text-primary !important;
+  
+  &:focus {
+    border-color: $link-color !important;
+    box-shadow: 0 0 0 0.2rem rgba($link-color, 0.25) !important;
+  }
+  
+  option {
+    background-color: $dark-bg-secondary !important;
+    color: $dark-text-primary !important;
+  }
+}
+
+// Links en modo oscuro
+.quarto-dark a {
+  color: $link-color !important;
+  
+  &:hover {
+    color: $link-hover-color !important;
+  }
+}
+
+// Botones en modo oscuro
+.quarto-dark .btn-primary {
+  background-color: $restec-red !important;
+  border-color: $restec-red !important;
+  color: $dark-text-primary !important;
+  
+  &:hover {
+    background-color: $restec-blue-gray !important;
+    border-color: $restec-blue-gray !important;
+    color: $dark-text-primary !important;
+  }
+}
+
+// Tablas en modo oscuro
+.quarto-dark .table {
+  color: $dark-text-primary !important;
+  
+  th, td {
+    border-color: $dark-border !important;
+    color: $dark-text-primary !important;
+  }
+  
+  thead th {
+    border-bottom-color: $dark-border !important;
+    color: $dark-text-primary !important;
+  }
+}
+
+// Formularios en modo oscuro
+.quarto-dark .form-control {
+  background-color: $dark-bg-secondary !important;
+  border-color: $dark-border !important;
+  color: $dark-text-primary !important;
+  
+  &:focus {
+    background-color: $dark-bg-secondary !important;
+    border-color: $link-color !important;
+    color: $dark-text-primary !important;
+    box-shadow: 0 0 0 0.2rem rgba($link-color, 0.25) !important;
+  }
+  
+  &::placeholder {
+    color: $dark-text-muted !important;
+  }
+}
+
+// Listing items específicos para Quarto
+.quarto-dark .quarto-listing .listing-item {
+  .listing-title {
+    color: $dark-text-primary !important;
+  }
+  
+  .listing-subtitle {
+    color: $dark-text-secondary !important;
+  }
+  
+  .listing-description {
+    color: $dark-text-secondary !important;
+  }
+}
+
+// Grid de posts
+.quarto-dark .quarto-listing-grid .card-img-top {
+  border-bottom: 1px solid $dark-border !important;
+}
+
+// Footer en modo oscuro
+.quarto-dark footer {
+  background-color: $dark-bg-primary !important;
+  border-top: 1px solid $dark-border !important;
+  color: $dark-text-primary !important;
+}
+
+// Breadcrumbs en modo oscuro
+.quarto-dark .breadcrumb {
+  .breadcrumb-item {
+    color: $dark-text-secondary !important;
+    
+    &.active {
+      color: $dark-text-primary !important;
+    }
+    
+    a {
+      color: $link-color !important;
+      
+      &:hover {
+        color: $link-hover-color !important;
+      }
+    }
+  }
+}
+
+// Asegurar que el contenido principal tenga fondo correcto
+.quarto-dark main,
+.quarto-dark .content {
+  background-color: $dark-bg-primary !important;
+  color: $dark-text-primary !important;
+}
+
+// Elementos específicos del listing
+.quarto-dark .quarto-grid-item {
+  background-color: $dark-bg-secondary !important;
+  border: 1px solid $dark-border !important;
+  
+  .quarto-grid-link {
+    color: $dark-text-primary !important;
+    text-decoration: none !important;
+    
+    &:hover {
+      color: $link-color !important;
+    }
+  }
+}

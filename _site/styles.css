@@ -1,1 +1,331 @@
-/* css styles */
+/* ==========================================
+   RESILIENT TECHNOLOGIES S.A.S - CUSTOM STYLES
+   Colores corporativos: #556379, #ED4251, #151C24, white
+   ========================================== */
+
+/* Variables CSS - Colores Corporativos */
+:root {
+  --restec-blue-gray: #556379;
+  --restec-red: #ED4251;
+  --restec-dark: #151C24;
+  --restec-white: #ffffff;
+  --restec-light-gray: #f8f9fa;
+  --restec-medium-gray: #6c757d;
+  --restec-shadow: rgba(21, 28, 36, 0.1);
+  --restec-hover-shadow: rgba(21, 28, 36, 0.2);
+}
+
+/* Importar fuente Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================
+   TIPOGRAFÍA GLOBAL
+   ========================================== */
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  color: var(--restec-dark);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: var(--restec-dark);
+  margin-bottom: 1rem;
+}
+
+h1 { font-size: 2.5rem; font-weight: 700; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+/* ==========================================
+   NAVBAR PERSONALIZADO
+   ========================================== */
+.navbar {
+  background-color: var(--restec-dark) !important;
+  box-shadow: 0 2px 20px var(--restec-shadow);
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand img {
+  height: 45px;
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand img:hover {
+  transform: scale(1.05);
+}
+
+.navbar-nav .nav-link {
+  color: var(--restec-white) !important;
+  font-weight: 500;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: var(--restec-blue-gray);
+  color: var(--restec-white) !important;
+  transform: translateY(-2px);
+}
+
+.navbar-nav .nav-link.active {
+  background-color: var(--restec-red);
+  color: var(--restec-white) !important;
+}
+
+/* ==========================================
+   BANNER PRINCIPAL
+   ========================================== */
+.title-block-banner {
+  background: linear-gradient(135deg, var(--restec-dark) 0%, var(--restec-blue-gray) 100%);
+  color: var(--restec-white);
+  padding: 4rem 0;
+  margin-bottom: 3rem;
+}
+
+.title-block-banner h1 {
+  color: var(--restec-white);
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.title-block-banner .subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+/* ==========================================
+   CARDS DE POSTS (GRID)
+   ========================================== */
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px var(--restec-shadow);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  background: var(--restec-white);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px var(--restec-hover-shadow);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  color: var(--restec-dark);
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.card-title a {
+  color: var(--restec-dark);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.card-title a:hover {
+  color: var(--restec-red);
+}
+
+.card-text {
+  color: var(--restec-medium-gray);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ==========================================
+   CATEGORÍAS Y TAGS
+   ========================================== */
+.badge {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.badge-primary {
+  background-color: var(--restec-red) !important;
+  color: var(--restec-white);
+}
+
+.badge-secondary {
+  background-color: var(--restec-blue-gray) !important;
+  color: var(--restec-white);
+}
+
+.badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* ==========================================
+   FILTROS Y CONTROLES
+   ========================================== */
+.quarto-listing-sort select,
+.quarto-listing-category select {
+  border: 2px solid var(--restec-blue-gray);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.quarto-listing-sort select:focus,
+.quarto-listing-category select:focus {
+  border-color: var(--restec-red);
+  box-shadow: 0 0 0 3px rgba(237, 66, 81, 0.1);
+  outline: none;
+}
+
+/* ==========================================
+   ABOUT PAGE
+   ========================================== */
+.about-contents h2 {
+  color: var(--restec-dark);
+  border-bottom: 3px solid var(--restec-red);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.about-contents ul li {
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+}
+
+.about-contents strong {
+  color: var(--restec-red);
+  font-weight: 600;
+}
+
+/* ==========================================
+   ENLACES Y BOTONES
+   ========================================== */
+a {
+  color: var(--restec-red);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--restec-blue-gray);
+  text-decoration: underline;
+}
+
+.btn-primary {
+  background-color: var(--restec-red);
+  border-color: var(--restec-red);
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--restec-blue-gray);
+  border-color: var(--restec-blue-gray);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ==========================================
+   CÓDIGO Y SINTAXIS
+   ========================================== */
+pre {
+  background-color: var(--restec-light-gray);
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+}
+
+code {
+  color: var(--restec-red);
+  background-color: rgba(237, 66, 81, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+@media (max-width: 768px) {
+  .title-block-banner h1 {
+    font-size: 2.2rem;
+  }
+  
+  .title-block-banner .subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .navbar-brand img {
+    height: 35px;
+  }
+}
+
+/* ==========================================
+   ANIMACIONES SUTILES
+   ========================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* ==========================================
+   FOOTER (si se agrega)
+   ========================================== */
+footer {
+  background-color: var(--restec-dark);
+  color: var(--restec-white);
+  padding: 2rem 0;
+  margin-top: 4rem;
+}
+
+footer a {
+  color: var(--restec-white);
+}
+
+footer a:hover {
+  color: var(--restec-red);
+}

@@ -1,0 +1,211 @@
+/*-- scss:defaults --*/
+
+// Resilient Technologies - Colores Corporativos para Light Mode
+$restec-blue-gray: #556379;
+$restec-red: #ED4251;
+$restec-dark: #151C24;
+$restec-white: #ffffff;
+
+// Light Mode Palette
+$light-bg-primary: #ffffff;
+$light-bg-secondary: #f8f9fa;
+$light-bg-tertiary: #e9ecef;
+$light-text-primary: #151C24;
+$light-text-secondary: #6c757d;
+$light-text-muted: #adb5bd;
+$light-border: #dee2e6;
+
+// Variables del tema claro
+$theme: "light";
+
+// Bootstrap color overrides for light theme
+$primary: $restec-red;
+$secondary: $restec-blue-gray;
+$dark: $restec-dark;
+$light: $light-bg-secondary;
+$info: #0dcaf0;
+$success: #198754;
+$warning: #ffc107;
+$danger: $restec-red;
+
+// Body light theme
+$body-bg: $light-bg-primary;
+$body-color: $light-text-primary;
+
+// Links light theme
+$link-color: $restec-red;
+$link-hover-color: $restec-blue-gray;
+
+// Typography light theme
+$font-family-sans-serif: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+$headings-font-family: "Poppins", sans-serif;
+$headings-font-weight: 600;
+$headings-color: $light-text-primary;
+
+/*-- scss:rules --*/
+
+// QUARTO LIGHT MODE - Usar selectores correctos de Quarto
+// Quarto usa .quarto-light en el body por defecto
+
+// Base light theme styles para Quarto
+.quarto-light,
+body:not(.quarto-dark) {
+  background-color: $light-bg-primary !important;
+  color: $light-text-primary !important;
+}
+
+// Banner del título en modo claro - EXACTAMENTE IGUAL QUE MODO OSCURO
+.quarto-light .title-block-banner,
+.quarto-light .title-block-banner.page-columns,
+body:not(.quarto-dark) .title-block-banner,
+body:not(.quarto-dark) .title-block-banner.page-columns,
+.title-block-banner,
+.title-block-banner.page-columns {
+  background: linear-gradient(135deg, #1f2630 0%, #7986CB 100%);
+  color: #E8EAED;
+
+  h1.title {
+    color: #E8EAED !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  .subtitle {
+    color: #BDC1C6 !important;
+  }
+}
+
+// Cards en modo claro
+.quarto-light .card,
+body:not(.quarto-dark) .card {
+  background-color: $light-bg-primary !important;
+  border: 1px solid $light-border !important;
+  box-shadow: 0 4px 6px -1px rgba(21, 28, 36, 0.1), 0 2px 4px -1px rgba(21, 28, 36, 0.06) !important;
+  color: $light-text-primary !important;
+  
+  .card-title {
+    color: $light-text-primary !important;
+    
+    a {
+      color: $light-text-primary !important;
+      text-decoration: none;
+      
+      &:hover {
+        color: $link-color !important;
+      }
+    }
+  }
+  
+  .card-text {
+    color: $light-text-secondary !important;
+  }
+  
+  .card-meta,
+  .listing-date,
+  .listing-author {
+    color: $light-text-muted !important;
+  }
+}
+
+// Navbar en modo claro (mantener diseño corporativo con texto blanco)
+.quarto-light .navbar,
+body:not(.quarto-dark) .navbar {
+  background-color: $restec-dark !important;
+  
+  .navbar-brand,
+  .navbar-nav,
+  .nav-link,
+  a {
+    color: $restec-white !important;
+  }
+}
+
+.quarto-light .navbar-nav .nav-link,
+body:not(.quarto-dark) .navbar-nav .nav-link {
+  color: $restec-white !important;
+  
+  &:hover {
+    color: $restec-white !important;
+    background-color: $restec-blue-gray !important;
+  }
+  
+  &:focus,
+  &:active {
+    color: $restec-white !important;
+  }
+}
+
+// Footer en modo claro - EXACTAMENTE IGUAL QUE MODO OSCURO
+.quarto-light footer,
+.quarto-light .page-footer,
+body:not(.quarto-dark) footer,
+body:not(.quarto-dark) .page-footer,
+footer,
+.page-footer {
+  background-color: $restec-dark !important;
+  border-top: 1px solid $light-border !important;
+  color: #E8EAED !important;
+}
+
+// Links en modo claro
+.quarto-light a,
+body:not(.quarto-dark) a {
+  color: $link-color !important;
+  
+  &:hover {
+    color: $link-hover-color !important;
+  }
+}
+
+// About page en modo claro
+.quarto-light .about-contents,
+body:not(.quarto-dark) .about-contents {
+  h2 {
+    color: $light-text-primary !important;
+    border-bottom: 3px solid $link-color !important;
+  }
+  
+  h3, h4, h5, h6 {
+    color: $light-text-primary !important;
+  }
+  
+  p {
+    color: $light-text-primary !important;
+  }
+  
+  strong {
+    color: $link-color !important;
+  }
+  
+  ul li {
+    color: $light-text-primary !important;
+  }
+}
+
+// Navbar brand y elementos específicos
+.quarto-light .navbar-brand,
+body:not(.quarto-dark) .navbar-brand {
+  color: $restec-white !important;
+  
+  &:hover,
+  &:focus {
+    color: $restec-white !important;
+  }
+}
+
+// Iconos en navbar
+.quarto-light .navbar .bi,
+.quarto-light .navbar i,
+body:not(.quarto-dark) .navbar .bi,
+body:not(.quarto-dark) .navbar i {
+  color: $restec-white !important;
+}
+
+// Toggle de tema
+.quarto-light .quarto-color-scheme-toggle,
+body:not(.quarto-dark) .quarto-color-scheme-toggle {
+  color: $restec-white !important;
+  
+  &:hover {
+    color: $restec-white !important;
+  }
+}
