@@ -1,21 +1,21 @@
 /*-- scss:defaults --*/
-
-// Resilient Technologies - Colores Corporativos para Light Mode
+  
+  // Resilient Technologies - Colores Corporativos para Light Mode
 $restec-blue-gray: #556379;
-$restec-red: #ED4251;
-$restec-dark: #151C24;
-$restec-white: #ffffff;
-
-// Light Mode Palette
+  $restec-red: #ED4251;
+  $restec-dark: #151C24;
+  $restec-white: #ffffff;
+  
+  // Light Mode Palette
 $light-bg-primary: #ffffff;
-$light-bg-secondary: #f8f9fa;
-$light-bg-tertiary: #e9ecef;
-$light-text-primary: #151C24;
-$light-text-secondary: #6c757d;
-$light-text-muted: #adb5bd;
-$light-border: #dee2e6;
-
-// Variables del tema claro
+  $light-bg-secondary: #f8f9fa;
+  $light-bg-tertiary: #e9ecef;
+  $light-text-primary: #151C24;
+  $light-text-secondary: #6c757d;
+  $light-text-muted: #adb5bd;
+  $light-border: #dee2e6;
+  
+  // Variables del tema claro
 $theme: "light";
 
 // Bootstrap color overrides for light theme
@@ -24,9 +24,9 @@ $secondary: $restec-blue-gray;
 $dark: $restec-dark;
 $light: $light-bg-secondary;
 $info: #0dcaf0;
-$success: #198754;
-$warning: #ffc107;
-$danger: $restec-red;
+  $success: #198754;
+  $warning: #ffc107;
+  $danger: $restec-red;
 
 // Body light theme
 $body-bg: $light-bg-primary;
@@ -43,8 +43,8 @@ $headings-font-weight: 600;
 $headings-color: $light-text-primary;
 
 /*-- scss:rules --*/
-
-// QUARTO LIGHT MODE - Usar selectores correctos de Quarto
+  
+  // QUARTO LIGHT MODE - Usar selectores correctos de Quarto
 // Quarto usa .quarto-light en el body por defecto
 
 // Base light theme styles para Quarto
@@ -62,16 +62,16 @@ body:not(.quarto-dark) .title-block-banner.page-columns,
 .title-block-banner,
 .title-block-banner.page-columns {
   background: linear-gradient(135deg, #1f2630 0%, #7986CB 100%);
-  color: #E8EAED;
-
-  h1.title {
-    color: #E8EAED !important;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  }
-
-  .subtitle {
-    color: #BDC1C6 !important;
-  }
+                              color: #E8EAED;
+                                
+                                h1.title {
+                                  color: #E8EAED !important;
+                                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+                                }
+                              
+                              .subtitle {
+                                color: #BDC1C6 !important;
+                              }
 }
 
 // Cards en modo claro

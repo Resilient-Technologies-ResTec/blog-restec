@@ -49,19 +49,30 @@ h3 { font-size: 1.5rem; }
 }
 
 .navbar-brand img {
-  height: 45px;
+  height: 60px !important;  /* Aumentado de 45px a 60px */
+  width: auto;
   transition: transform 0.3s ease;
+  margin-right: 1rem;  /* Espacio entre logo y texto/botones */
 }
 
 .navbar-brand img:hover {
   transform: scale(1.05);
 }
 
+/* Ajustar el navbar para acomodar el logo más grande */
+.navbar {
+  min-height: 80px;  /* Aumentar altura mínima del navbar */
+}
+
+.navbar-nav {
+  align-items: center;  /* Centrar verticalmente los elementos */
+}
+
 .navbar-nav .nav-link {
   color: var(--restec-white) !important;
   font-weight: 500;
   margin: 0 0.5rem;
-  padding: 0.5rem 1rem !important;
+  padding: 0.75rem 1rem !important;  /* Ajustar padding para el navbar más alto */
   border-radius: 6px;
   transition: all 0.3s ease;
 }
@@ -81,14 +92,18 @@ h3 { font-size: 1.5rem; }
    BANNER PRINCIPAL
    ========================================== */
 .title-block-banner {
-  background: linear-gradient(135deg, var(--restec-dark) 0%, var(--restec-blue-gray) 100%);
-  color: var(--restec-white);
+  background: linear-gradient(135deg, var(--restec-dark) 0%, var(--restec-blue-gray) 100%) !important;
+  color: #E8EAED !important;
   padding: 4rem 0;
   margin-bottom: 3rem;
+  border-bottom: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-.title-block-banner h1 {
-  color: var(--restec-white);
+.title-block-banner h1,
+.title-block-banner .title {
+  color: #E8EAED !important;
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -96,10 +111,26 @@ h3 { font-size: 1.5rem; }
 }
 
 .title-block-banner .subtitle {
-  color: rgba(255, 255, 255, 0.9);
+  color: #BDC1C6 !important;
   font-size: 1.3rem;
   font-weight: 400;
   margin-bottom: 0;
+}
+
+/* Eliminar línea azul del banner - GLOBAL */
+#title-block-header,
+.quarto-title-block,
+.quarto-title-block.default {
+  border-bottom: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Eliminar pseudo-elementos que puedan crear líneas */
+#title-block-header::after,
+.quarto-title-block::after {
+  display: none !important;
+  content: none !important;
 }
 
 /* ==========================================
@@ -155,6 +186,20 @@ h3 { font-size: 1.5rem; }
   color: var(--restec-medium-gray);
   font-size: 0.95rem;
   line-height: 1.5;
+}
+
+/* Metadatos de autor y fecha - MÁS OSCUROS */
+.card-footer,
+.listing-date,
+.listing-author,
+.card-meta,
+.quarto-listing .listing-item .listing-date,
+.quarto-listing .listing-item .listing-author {
+  color: #495057 !important;  /* Gris más oscuro para mejor contraste */
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* ==========================================
@@ -315,17 +360,20 @@ code {
 /* ==========================================
    FOOTER (si se agrega)
    ========================================== */
-footer {
-  background-color: var(--restec-dark);
-  color: var(--restec-white);
+footer,
+.page-footer {
+  background-color: var(--restec-dark) !important;
+  color: #E8EAED !important;
   padding: 2rem 0;
   margin-top: 4rem;
 }
 
-footer a {
-  color: var(--restec-white);
+footer a,
+.page-footer a {
+  color: #E8EAED !important;
 }
 
-footer a:hover {
-  color: var(--restec-red);
+footer a:hover,
+.page-footer a:hover {
+  color: #BDC1C6 !important;
 }

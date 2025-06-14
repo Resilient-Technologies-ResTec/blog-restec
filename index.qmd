@@ -49,5 +49,46 @@ include-in-header:
       #title-block-header * {
         color: #ffffff !important;
       }
+      
+      /* QUITAR línea azul debajo del banner - AGRESIVO */
+      #title-block-header,
+      .title-block-banner,
+      .quarto-title-block,
+      .quarto-title-block.default,
+      #title-block-header.quarto-title-block,
+      #title-block-header.quarto-title-block.default {
+        border-bottom: none !important;
+        border: none !important;
+        margin-bottom: 0 !important;
+        box-shadow: none !important;
+      }
+      
+      /* Eliminar cualquier pseudo-elemento que pueda crear la línea */
+      #title-block-header::after,
+      .title-block-banner::after,
+      .quarto-title-block::after {
+        display: none !important;
+        content: none !important;
+      }
+      
+      /* ELIMINAR línea/efecto azul específico del quarto-title-meta */
+      #title-block-header > div.quarto-title-meta.column-page-left,
+      #title-block-header .quarto-title-meta,
+      .quarto-title-meta.column-page-left,
+      .quarto-title-meta {
+        display: none !important;
+        border: none !important;
+        background: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        height: 0 !important;
+        overflow: hidden !important;
+      }
+      
+      /* Ocultar completamente el elemento problemático */
+      #title-block-header > div.quarto-title-meta {
+        visibility: hidden !important;
+        opacity: 0 !important;
+      }
       </style>
 ---

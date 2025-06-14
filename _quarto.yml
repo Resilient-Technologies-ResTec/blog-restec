@@ -9,15 +9,14 @@ website:
   navbar:
     background: "#151C24"
     foreground: "white"
-    logo: logo-restec.png
     logo-alt: "Resilient Technologies Logo"
     title: false
     collapse-below: lg
     left:
-      - text: "Inicio"
+      - text: "Blog"
         href: index.qmd
     right:
-      - text: "Acerca de"
+      - text: "ResTec"
         href: about.qmd
       - icon: github
         href: https://github.com/ResTec-Col
@@ -52,8 +51,7 @@ website:
     foreground: "white"
     border: true
     center: |
-      © 2025 by **Resilient Technologies S.A.S**  
-      Todos los derechos reservados
+      © 2025 by [**Resilient Technologies S.A.S**](https://restec.com.co/)
 format:
   html:
     theme:
@@ -69,6 +67,7 @@ format:
     mainfont: "Poppins"
     fontsize: "16px"
     linestretch: 1.6
+    lang: es
 
 execute:
   freeze: auto
