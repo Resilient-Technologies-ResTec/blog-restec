@@ -1,0 +1,174 @@
+---
+title: "Título"
+author: "Resilient Technologies S.A.S"
+date: "2025-06-23"
+categories: [Cerdos, Precios]
+image: "img.png"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+```{r}
+## Bibliotecas
+# library(httr)
+# library(jsonlite)
+# library(googleCloudStorageR)
+library(arrow)
+library(tidyverse)
+library(readxl)
+```
+
+
+# Notas
+
+- Sebastián propone una publicación donde se hable de tedencias de precios
+- Sebastián propone que el análisis muestre la rentabilidad de este negocio
+- ¿Qué datos tenemos?
+  - Precios mensuales de cerdo en pie PorkColombia
+  - Precios mensuales maíz EEUU (Investing)
+- ¿Qué quiero analizar o mostrar?
+  - Variación del precio y mirar si están relacionadas precio maíz vs precio del cerdo
+  - Sebas espera que a mayor oferta de cerdo menor es el precio
+  
+```{r}
+#| eval: false
+
+# Configuración --------------------------------
+
+## Funciones personalizadas
+source("../../source-r/getSecretGCP.R", encoding = "UTF-8")
+source("../../source-r/authRestec.R", encoding = "UTF-8")
+
+## Cuenta de servicios GCP
+cta_servicio <-
+  getSecretGCP(
+    project_id =  Sys.getenv("PROJECT_ID"),
+    secret_name = Sys.getenv("SECRET_NAME"),
+    secret_version = Sys.getenv("SECRET_VERSION"),
+    entorno = Sys.getenv("ENTORNO")
+  )
+
+# Autenticación GCP
+authRestec(entorno = Sys.getenv("ENTORNO"),
+           ruta_credenciales = cta_servicio)
+
+# Datos abastecimiento
+abastecimiento1 <-
+  read_parquet(URLencode(Sys.getenv("RUTA_ABASTECIMIENTO1"))) |> 
+  filter(producto == "Cerdo en pie") |> 
+  filter(fecha >= "2014-01-01") |> 
+  mutate(year_mes = floor_date(fecha, unit = "month"))
+
+abastecimiento2 <-
+  read_parquet(URLencode(Sys.getenv("RUTA_ABASTECIMIENTO2"))) |> 
+  filter(producto == "Cerdo en pie") |>
+  filter(fecha >= "2024-12-31")  |> 
+  mutate(year_mes = floor_date(fecha, unit = "month"))
+
+abastecimiento_final <-
+  bind_rows(abastecimiento1, abastecimiento2) |>
+  group_by(year_mes, depto_procedencia, mpio_procedencia, ciudad_mercado) |>
+  reframe(total_kg = sum(cantidad_kg, na.rm = TRUE))
+
+write_parquet(abastecimiento_final,
+              "data/abastecimiento_cerdopie_2014_2024.parquet")
+```
+
+```{r}
+# Datos abastecimiento
+df_abastecimiento <-
+  read_parquet("data/abastecimiento_cerdopie_2014_2024.parquet") |> 
+  rename(fecha = year_mes)
+
+df_abastecimiento_nacional <-
+  df_abastecimiento |> 
+  group_by(fecha) |> 
+  reframe(cantidad_nal_kg = sum(total_kg, na.rm = TRUE))
+  
+
+# Datos precios cerdo en pie
+df_precio_cerdo <-
+  read_excel("data/2025.05.20-Precio_cerdo_pie_canales_porcinas_Porkcolombia.xlsx",
+             sheet = "Precio nacional pie ",
+             skip = 7) |> 
+  select(-c(`2010`, `2011`, `2012`, `2013`, `2025`)) |> 
+  pivot_longer(cols = -Mes, names_to = "year_es", values_to = "precio_pie") |> 
+  mutate(Mes = case_when(
+    Mes == "Ene" ~ 1,
+    Mes == "Feb" ~ 2,
+    Mes == "Mar" ~ 3,
+    Mes == "Abr" ~ 4,
+    Mes == "May" ~ 5,
+    Mes == "Jun" ~ 6,
+    Mes == "Jul" ~ 7,
+    Mes == "Ago" ~ 8,
+    Mes == "Sep" ~ 9,
+    Mes == "Oct" ~ 10,
+    Mes == "Nov" ~ 11,
+    Mes == "Dic" ~ 12
+  ),
+  fecha = paste0(year_es, "-", Mes, "-01"),
+  fecha = ymd(fecha)) |> 
+  select(fecha, precio_pie)
+
+# Datos precios de maíz EEUU
+df_precio_maiz <-
+  read_csv("data/Datos históricos Futuros maíz EE.UU-Descarga20250616..csv") |> 
+  mutate(Fecha = dmy(Fecha)) |> 
+  select(fecha = Fecha,
+         precio_maiz = Último)
+```
+
+- ¿Cuál departamento tiene mayor volumen de abastecimiento?
+
+```{r}
+df_abastecimiento |> 
+  group_by(depto_procedencia) |> 
+  reframe(total_kg = sum(total_kg, na.rm = TRUE)) |> 
+  arrange(desc(total_kg)) |> 
+  mutate(porc = round((total_kg / sum(total_kg)) * 100, 2))
+```
+
+- Series temporales
+
+```{r}
+df_series_mensuales <-
+  df_precio_cerdo |> 
+  left_join(df_precio_maiz, by = "fecha") |> 
+  left_join(df_abastecimiento_nacional, by = "fecha") |> 
+  filter(!is.na(fecha))
+
+df_series_mensuales |> 
+  pivot_longer(cols = -fecha) |> 
+  group_by(name) |> 
+  mutate(value_scale = scale(value, center = TRUE, scale = TRUE)) |> 
+  ggplot(aes(x = fecha, y = value_scale, color = name)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
+  geom_line() +
+  theme(legend.position = "top")
+```
+
+
+- Rezago precio maíz vs precio en pie:
+
+```{r}
+df_series_mensuales |> 
+  mutate(grupo_year = if_else(year(fecha) <= 2020, "PreCOVID", "PosCOVID")) |> 
+  arrange(fecha) |> 
+  mutate(rezago_pmaiz = lag(precio_maiz, n = 1)) |> 
+  ggplot(aes(x = rezago_pmaiz, y = precio_pie, color = grupo_year)) +
+  geom_point() +
+  scale_x_log10() +
+  scale_y_log10() +
+  geom_smooth(method = "lm")
+```
+
+
+# URLs
+
+- <https://porkcolombia.co/estadisticas-sectoriales/>
+- <https://es.investing.com/commodities/us-corn>
+- <https://www.dane.gov.co/index.php/estadisticas-por-tema/agropecuario/sistema-de-informacion-de-precios-sipsa/componente-abastecimientos-1>
+  
